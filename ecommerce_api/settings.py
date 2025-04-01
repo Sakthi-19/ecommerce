@@ -52,12 +52,17 @@ WSGI_APPLICATION = 'ecommerce_api.wsgi.application'
 
 # MongoDB Connection
 from mongoengine import connect
+db_name = os.getenv('DB_NAME', 'ecommerce_db')
+db_host = os.getenv('DB_HOST')
+db_username = os.getenv('DB_USERNAME')
+db_password = os.getenv('DB_PASSWORD')
+auth_source = os.getenv('AUTH_SOURCE', 'admin')
+
 connect(
-    db='ecommerce_db',
-    host='mongodb+srv://sakthivel19:Sakthivel-19@cluster0.yfwkf.mongodb.net/ecommerce_db?retryWrites=true&w=majority',
-    username='sakthivel19',
-    password='Sakthivel-19',
-    authentication_source='admin'
+    host=db_host,
+    username=db_username,
+    password=db_password,
+    authSource=auth_source
 )
 
 SIMPLE_JWT = {
